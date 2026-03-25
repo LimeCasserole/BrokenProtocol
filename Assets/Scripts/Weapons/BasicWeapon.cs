@@ -52,7 +52,7 @@ public class Weapon : IItem
 
         _animator.Play(fireAnimation, -1, 0.0f);
         Debug.Log($"Ammo left: {ammo.count}");
-        Debug.Log($"{Camera.main.transform.forward}");
+        // Debug.Log($"{Camera.main.transform.forward}");
         ammo.count -= 1;
 
         float maxDistance = 1000f;

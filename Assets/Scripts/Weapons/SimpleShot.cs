@@ -6,6 +6,7 @@ using System.Collections;
 public class SimpleShot : MonoBehaviour {
     [SerializeField] private GameObject bulletHoleDecal;
     [SerializeField] private GameObject muzzleFlash;
+    [SerializeField] private float damage = 20f;
     private GameObject decalsHolder = null;
     private WeaponEventBus events;
     private Coroutine flash;
@@ -21,8 +22,15 @@ public class SimpleShot : MonoBehaviour {
         }
 
         flash = StartCoroutine(spawnFlash());
-
-        spawnBulletHole(hit, ifHit);
+        
+        if (ifHit) {
+            spawnBulletHole(hit);
+            
+            IHitDetector detector = hit.transform.GetComponent<IHitDetector>();
+            if (detector != null) {
+                detector.OnHit(damage);
+            }
+        }
     }
 
     private IEnumerator spawnFlash() {
@@ -31,20 +39,13 @@ public class SimpleShot : MonoBehaviour {
         muzzleFlash.SetActive(false);
     }
 
-    private void spawnBulletHole(RaycastHit hit, bool ifHit) {
-        if(ifHit) {
-            Vector3 offsetPosition = hit.point + hit.normal * 0.01f;
-            Quaternion rotation = Quaternion.LookRotation(hit.normal);
-            GameObject instance = Instantiate(bulletHoleDecal, offsetPosition, rotation);
+    private void spawnBulletHole(RaycastHit hit) {
+        Vector3 offsetPosition = hit.point + hit.normal * 0.01f;
+        Quaternion rotation = Quaternion.LookRotation(hit.normal);
+        GameObject instance = Instantiate(bulletHoleDecal, offsetPosition, rotation);
 
-            if (decalsHolder != null) {
-                instance.transform.parent = decalsHolder.transform;
-            }
-
-            HitDetector detector = hit.transform.GetComponent<HitDetector>();
-            if (detector != null) {
-                detector.OnHit();
-            }
+        if (decalsHolder != null) {
+            instance.transform.parent = decalsHolder.transform;
         }
     }
 }

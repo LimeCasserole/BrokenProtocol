@@ -1,10 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HitDetector : MonoBehaviour {
-    public UnityEvent gotHit = new();
-
-    public void OnHit() {
-        gotHit.Invoke();
-    }
+public interface IHitDetector {
+    public void OnHit(float damage) {}
 }
