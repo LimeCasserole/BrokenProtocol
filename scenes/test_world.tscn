@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cba7l4shn1gk6"]
+
+[ext_resource type="PackedScene" uid="uid://dygu41tmyjpfn" path="res://global/GlobalEvents.tscn" id="1_amxg5"]
+[ext_resource type="PackedScene" uid="uid://x31vdxx20cws" path="res://entities/player/Player.tscn" id="1_kyfjp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i0fs3"]
+size = Vector3(100, 0.5, 100)
+
+[node name="TestWorld" type="Node3D" unique_id=1722964769]
+
+[node name="GlobalEvents" parent="." unique_id=1357806623 instance=ExtResource("1_amxg5")]
+
+[node name="Player" parent="." unique_id=567064752 instance=ExtResource("1_kyfjp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06701046, 1.2186608, 0.008768082)
+
+[node name="Structure" type="Node" parent="." unique_id=407552775]
+
+[node name="Floor" type="Node3D" parent="Structure" unique_id=767394328]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Structure/Floor" unique_id=1671752370]
+mesh = SubResource("BoxMesh_i0fs3")

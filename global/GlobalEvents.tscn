@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dygu41tmyjpfn"]
+
+[ext_resource type="Script" uid="uid://bubbxe0drenbt" path="res://global/InputHandler.cs" id="1_dhqbp"]
+
+[node name="GlobalEvents" type="Node3D" unique_id=1357806623]
+
+[node name="InputHandler" type="Node3D" parent="." unique_id=798862548]
+script = ExtResource("1_dhqbp")
